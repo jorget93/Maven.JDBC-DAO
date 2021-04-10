@@ -75,6 +75,15 @@ public class DAO implements CrudOps<Houses>{
     }
 
     public Houses create(Houses dto) {
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("INSERT INTO Houses (Number, Type, Color, Pool, Yard, Tenants) "+
+                    "VALUES ('" +dto.getNumber()+"', '"+dto.getType()+"',' " +dto.getColor()+ "'," +
+                    "'" +dto.getPool()+"', '"+dto.getYard()+"',' " +dto.getTenants()+ "')");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 

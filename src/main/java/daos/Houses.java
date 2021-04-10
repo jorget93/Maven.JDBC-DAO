@@ -12,6 +12,14 @@ public class Houses {
     public Houses(){
 
     }
+    public Houses (int number, String type, String color, boolean pool, boolean yard, int tenants){
+        this.number = number;
+        this.type = type;
+        this.color = color;
+        this.pool = pool;
+        this.yard = yard;
+        this.tenants = tenants;
+    }
 
     public void setNumber(int number) {
         this.number = number;
@@ -35,6 +43,30 @@ public class Houses {
 
     public void setTenants(int tenants) {
         this.tenants = tenants;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public boolean getPool() {
+        return pool;
+    }
+
+    public boolean getYard() {
+        return yard;
+    }
+
+    public int getTenants() {
+        return tenants;
     }
 
     @Override

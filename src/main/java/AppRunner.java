@@ -12,17 +12,21 @@ public class AppRunner {
     public static void main(String[] args) {
         DAO dao = new DAO();
 
-        Houses house = dao.findByNumber(101);
+
+
+        Houses newHouse = new Houses(105, "TownHouse", "blue", true, true, 3 );
+        dao.create(newHouse);
+        Houses house = dao.findByNumber(105);
         System.out.println(house);
-
-
-
 
 //        List<Houses> houseList = new ArrayList<Houses>();
 //        houseList.addAll(dao.findAll());
 //        for(Houses house: houseList){
 //            System.out.println(house);
 //        }
+
+
+
 
 
     }
