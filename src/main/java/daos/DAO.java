@@ -10,6 +10,19 @@ import java.util.List;
 public class DAO implements CrudOps<Houses>{
     private Connection connection = ConnectionFactory.getConnection();
 
+    private Houses extractFromResultSet(ResultSet rs) throws SQLException {
+        Houses house = new Houses();
+
+        house.setNumber( rs.getInt("Number") );
+        house.setType( rs.getString("Type") );
+        house.setColor( rs.getString("Color") );
+        house.setPool( rs.getBoolean("Pool") );
+        house.setYard(rs.getBoolean("Yard"));
+        house.setTenants(rs.getInt("Tenants"));
+
+        return house;
+    }
+
     public Houses findByNumber(int number) {
         try{
             Statement statement = connection.createStatement();
@@ -38,20 +51,12 @@ public class DAO implements CrudOps<Houses>{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * From Houses");
 
-            if(rs.next()){
-                Houses house = new Houses();
-
-                house.setNumber(rs.getInt("Number"));
-                house.setType(rs.getString("Type"));
-                house.setColor(rs.getString("Color"));
-                house.setPool(rs.getBoolean("Pool"));
-                house.setYard(rs.getBoolean("Yard"));
-                house.setTenants(rs.getInt("Tenants"));
                 while(rs.next()) {
-                    housesList.add((Houses) rs.getObject(String.valueOf(house)));
+                    Houses house = extractFromResultSet(rs);
+                    housesList.add(house);
                 }
-            }
-            return housesList;
+                return housesList;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
